@@ -1,0 +1,8 @@
+development:
+  adapter: mysql2
+  encoding: utf8
+  database: dbCrudCar
+  username: root
+  password: 
+  host: localhost
+  port: 3306

@@ -1,0 +1,15 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  model: MyString
+  plate: MyString
+  year: 1
+  marketval: 9.99
+  Customer_id: 
+
+two:
+  model: MyString
+  plate: MyString
+  year: 1
+  marketval: 9.99
+  Customer_id: 

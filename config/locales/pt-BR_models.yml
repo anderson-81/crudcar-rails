@@ -1,0 +1,22 @@
+"pt-BR":
+  activerecord:
+    models:
+      customer: Cliente
+      car: Carro
+    attributes:
+      customer:
+        name: "Name"
+        salary: "Renda"
+        birthday: "Data de Nascimento"
+        gender: "Sexo"
+        helpers.links.edit: Editar
+        Actions: Ações
+      car:
+        model: "Modelo"
+        plate: "Placa"
+        year: "Ano"
+        marketval: "Valor de Mercado"
+        helpers.links.edit: Editar
+
+
+      
