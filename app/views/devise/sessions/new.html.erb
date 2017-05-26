@@ -1,68 +1,44 @@
-
-
 <script>
-
-$(document).ready(function() {
-  $("#divLogin").hide('fast', function() {
-    $(this).fadeIn('slow', function() {
-    });
-  });
-});
-
-
+   $(document).ready(function() {
+     $("#divLogin").hide('fast', function() {
+       $(this).fadeIn('slow', function() {
+       });
+     });
+   });
 </script>
-
-
-
-<style>
-  input[type=submit]
-  {
-    width:120px;
-  }
-
-    body{
-    color:white;
-    font-weight:bold; 
-
-    background: url("back.png") fixed no-repeat; -webkit-background-size: cover; -o-background-size: cover; -moz-background-size: cover; background-size: cover; 
-
-  }
-</style>
-
-
-<%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
-    
-    <div id="divLogin"> 
-      <h2>.::Login:.</h2> 
-      <div class="form-group col-lg-5 field">
-        <%= f.label :email %>
-        <%= f.email_field :email, :class => 'form-control', autofocus: true, :value => "anderson@user.com" %>
+<div class="container">
+   <div class="row">
+      <div class="col-md-4">
+         <div class="form-group">
+            <h2>:Login:.</h2>
+         </div>
       </div>
-      
-      <div class="row"></div>
-
-      <div class="form-group col-lg-5 field">
-        <%= f.label :password %>
-        <%= f.password_field :password, :class => 'form-control', autocomplete: "off", :value => "anderson" %>
+   </div>
+   <div class="row">
+      <div class="col-md-4">
+         <%= form_for(resource, as: resource_name, url: session_path(resource_name)) do |f| %>
+         <div class="form-group">
+            <%= f.label :email %>
+            <%= f.email_field :email, :class => 'form-control', autofocus: true, :value => "admin@admin.com" %>
+         </div>
+         <div class="form-group">
+            <%= f.label :password %>
+            <%= f.password_field :password, :class => 'form-control', autocomplete: "off", :value => "anderson" %>
+         </div>
+         <% if devise_mapping.rememberable? -%>
+         <div class="form-group">
+            <%= f.check_box :remember_me %>
+            <%= f.label :remember_me %>
+         </div>
+         <% end -%>
+         <div class="form-group">
+            <%= f.submit "Login", :class => "btn btn-success pull-right col-md-3" %>
+         </div>
+         <% end %>
       </div>
-
-      <div class="row"></div>
-
-      <% if devise_mapping.rememberable? -%>
-        <div class="form-group col-lg-5 field">
-          <%= f.check_box :remember_me %>
-          <%= f.label :remember_me %>
-        </div>
-      <% end -%>
-
-      <div class="row"></div>
-
-      <div class="form-group col-lg-6 field actions">
-        <%= f.submit "Login", :class => "btn btn-success" %>
-      </div>
-    </div>
-
-<% end %>
-
-<%= render "devise/shared/links" %>
+   </div>
+</div>
+<div class="container">
+   <div class="row"><%= render "devise/shared/links" %></div>
+</div>
 

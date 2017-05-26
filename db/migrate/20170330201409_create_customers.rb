@@ -3,7 +3,7 @@ class CreateCustomers < ActiveRecord::Migration
     create_table :customers do |t|
       t.string :name
       t.string :email
-      t.decimal :salary
+      t.decimal :salary, :precision => 10, :scale => 2
       t.date :birthday
       t.string :gender
 

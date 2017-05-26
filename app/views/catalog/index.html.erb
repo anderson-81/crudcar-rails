@@ -1,0 +1,26 @@
+
+
+<div class="container">
+	<div class="row">
+		 <% @cars.each do |car| %>
+		 		<%= link_to "/cars/#{car.id}", :method => 'show'  do %>
+			 		<div class="col-md-3 font-text div-col">
+			 				<%= image_tag car.avatar.url, :class => 'img-catalog img-responsive' %>
+			 				<div class="row">
+				 				<div class="col-md-8 text-left">
+				 					<b>Model: </b><%= car.model %>
+				 				</div>
+				 				<div class="col-md-4">
+				 					<b>Year: </b><%= car.year %>
+				 				</div>
+			 				</div>
+			 				<div class="row">
+			 					<div class="col-md-12">
+			 						<b>Price: </b><%= number_to_currency(car.marketval, unit: "R$", separator: ",", delimiter: "") %>
+			 					</div>
+			 				</div>
+			 		</div>
+		 		<% end %>
+		 <% end %>
+	</div>
+</div>

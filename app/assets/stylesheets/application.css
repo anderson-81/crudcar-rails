@@ -10,7 +10,27 @@
  * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
  * file per style scope.
  *
- *= require_tree .
  *= require_self
  *= jquery-ui
+ *= jquery-ui
+ *= require bootstrap.min.css
+ *= require bootstrap.css
+ *= require bootstrap-datepicker.css
+ *= require bootstrap-datepicker.min.css
+ *= require bootstrap-datepicker.standalone.css
+ *= require bootstrap-datepicker.standalone.min.css
+ *= require bootstrap-datepicker3.css
+ *= require bootstrap-datepicker3.min.css
+ *= require bootstrap-datepicker3.standalone.css
+ *= require bootstrap-datepicker3.standalone.min.css
+ *= require crudcar-rails.css
  */
+
+@font-face {
+  font-family: 'Glyphicons Halflings';
+  src: url('../assets/glyphicons-halflings-regular.eot');
+  src: url('../assets/glyphicons-halflings-regular.eot?#iefix') format('embedded-opentype'),
+  url('../assets/glyphicons-halflings-regular.woff') format('woff'),
+  url('../assets/glyphicons-halflings-regular.ttf') format('truetype'),
+  url('../assets/glyphicons-halflings-regular.svg#glyphicons_halflingsregular') format('svg');
+}

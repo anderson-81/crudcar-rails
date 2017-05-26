@@ -4,7 +4,7 @@ class CreateCars < ActiveRecord::Migration
       t.string :model
       t.string :plate
       t.integer :year
-      t.decimal :marketval
+      t.decimal :marketval, :precision => 10, :scale => 2
       t.references :Customer, index: true, foreign_key: true
 
       t.timestamps null: false

@@ -1,5 +1,122 @@
-<%- model_class = Customer -%>
-<div class="page-header">
-  <h1><%=t '.title', :default => [:'helpers.titles.edit', 'Edit %{model}'], :model => model_class.model_name.human.titleize %></h1>
+<div class="container">
+   <div class="row">
+      <div class="col-md-8 center-block">
+         <div class="form-group">
+            <h1>Edit Customer</h1>
+            <hr>
+         </div>
+         <%= form_for @customer, :class => "form-horizontal customer", :html => { multipart: true } do |f| %>
+         <% if @customer.errors.any? %>
+         <div id="error_expl" class="panel panel-danger">
+            <div class="panel-heading">
+               <h3 class="panel-title"><%= pluralize(@customer.errors.count, "error") %> prohibited this customer from being saved:</h3>
+            </div>
+            <div class="panel-body">
+               <ul>
+                  <% @customer.errors.full_messages.each do |msg| %>
+                  <li><%= msg %></li>
+                  <% end %>
+               </ul>
+            </div>
+         </div>
+         <% end %>
+         <div class="form-group">
+            <%= f.label :name %>
+            <%= f.text_field :name, :class => 'form-control' %>
+         </div>
+         <div class="form-group">
+            <%= f.label :email %>
+            <%= f.text_field :email, :class => 'form-control' %>
+         </div>
+         <div class="form-group">
+            <%= f.label :salary %>
+            <%= f.text_field :salary, :class => 'form-control' %>
+         </div>
+         
+         <h1 id="teste"></h1>  
+
+         <div class="form-group">
+            <%= f.label :birthday %>
+            <div class="input-group date" data-provide="datepicker">
+               <%= f.text_field :birthday, :class => 'form-control', :readonly => true %>
+               <div class="input-group-addon">
+                    <span class="glyphicon glyphicon-th"></span>
+               </div>
+            </div>
+         </div>
+         
+
+
+         <div class="form-group">
+            <%= f.label :gender %>
+            <%= f.select :gender, options_for_select([[t('Male'), 'M'],[t('Female'), 'F']]), {}, {:class => 'form-control'} %>
+         </div>
+
+          <div class="form-group">
+            <label>Current Photo:</label>
+            <b><%= link_to ' photo', @customer.avatar.url %></b>
+         </div>
+         <div class="form-group">
+            <label>Photo</label>
+            <%= f.file_field :avatar, :class => 'form-control' %>
+         </div>
+         <div class="form-group">
+            <button type="button" class="btn btn-warning col-md-2 pull-right" data-toggle="modal" data-target="#modalEdit">Edit</button>
+            <%= link_to "Cancel", :back, :class => 'btn btn-default col-md-2 pull-right' %>
+            <button type="button" class="btn btn-danger col-md-2 pull-right" data-toggle="modal" data-target="#modalDelete">Delete</button>
+         </div>
+         <div id="modalEdit" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">Question</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>Do you want edit this customer?</p>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                     <%= button_to "Yes", customer_path(:id => @customer.id), :method => :update, :class => 'btn btn-warning' %>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <div id="modalDelete" class="modal fade" role="dialog">
+            <div class="modal-dialog">
+               <div class="modal-content">
+                  <div class="modal-header">
+                     <button type="button" class="close" data-dismiss="modal">&times;</button>
+                     <h4 class="modal-title">Question</h4>
+                  </div>
+                  <div class="modal-body">
+                     <p>Do you want delete this customer?</p>
+                  </div>
+                  <div class="modal-footer">
+                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                     <%= button_to "Yes", customer_path(:id => @customer.id), :method => :delete, :class => 'btn btn-danger' %>
+                  </div>
+               </div>
+            </div>
+         </div>
+         <% end %>
+      </div>
+   </div>
 </div>
-<%= render :partial => 'form' %>
+<script>
+   var j = $.noConflict();
+   j("#customer_salary").maskMoney({thousands:'', decimal:'.'});
+
+   j(function () {
+      var data = j('#customer_birthday').val();
+      if (data.indexOf("/") == -1)
+      {
+         var birthday = j('#customer_birthday').val();   
+         var year = birthday.substr(0,4);
+         var month = birthday.substr(5,2);
+         var day = birthday.substr(8,2);
+         j('#customer_birthday').val(day + "/" + month + "/" + year);
+      } 
+      j('#customer_birthday').datetimepicker();
+   });
+</script>

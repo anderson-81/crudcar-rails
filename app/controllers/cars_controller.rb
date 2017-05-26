@@ -1,6 +1,6 @@
 class CarsController < ApplicationController
   before_action :set_car, only: [:show, :edit, :update, :destroy]
-  before_action :authenticate_user!
+  before_action :authenticate_user!, except: [:show]
   
   def new
     @customer = Customer.find(params[:custID])
@@ -8,8 +8,9 @@ class CarsController < ApplicationController
   end
 
   def show
-    @car = Car.find(params[:carID])
-    @customer = Customer.find(params[:custID]) 
+    print params[:id]
+    @car = Car.find(params[:id])
+    @customer = Customer.find(@car.Customer_id) 
   end
 
   def edit
@@ -21,11 +22,10 @@ class CarsController < ApplicationController
     @car = Car.new(car_params)
     respond_to do |format|
       if @car.save
-        format.html { redirect_to "/", notice: 'Car was successfully created.' }
-        format.json { render :show, status: :created, location: @car }
+        format.html { redirect_to "/customers/#{@car.Customer_id}", notice: 'Car was successfully created.'} 
       else
+        @customer = Customer.find(@car.Customer_id)
         format.html { render :new }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -34,22 +34,20 @@ class CarsController < ApplicationController
     @car = Car.find(params[:id])
     respond_to do |format|
       if @car.update(car_params)
-        format.html { redirect_to "/", notice: 'Car was successfully updated.' }
-        format.json { render :show, status: :ok, location: @car }
+        format.html { redirect_to "/customers/#{@car.Customer_id}", notice: 'Car was successfully updated.'} 
       else
+        @customer = Customer.find(@car.Customer_id)
         format.html { render :edit }
-        format.json { render json: @car.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @car = Car.find(params[:carID])
-    @customer = Customer.find(params[:custID])
+    @car = Car.find(params[:id])
+    @customer_id = @car.Customer_id
     @car.destroy
     respond_to do |format|
-      format.html { redirect_to "/", notice: 'Car was successfully destroyed.' }
-      format.json { head :no_content }
+      format.html { redirect_to "/customers/#{@customer_id}", notice: 'Car was successfully deleted.' }
     end
   end
 

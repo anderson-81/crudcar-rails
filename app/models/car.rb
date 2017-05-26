@@ -17,7 +17,6 @@ class Car < ActiveRecord::Base
 	validates :year, length: {maximum: 4 }
 
 	validates :plate, uniqueness: true
-  validates :marketval, inclusion: {in: 0..9999999}
 
   has_one :avatar
   accepts_nested_attributes_for :avatar, allow_destroy: true
@@ -25,4 +24,10 @@ class Car < ActiveRecord::Base
   #Avatar
   has_attached_file :avatar
   validates_attachment_content_type :avatar, content_type: /\Aimage\/.*\Z/
+
+  validates :plate, format: { with: /\A[A-Z]{3}\d{4}\z/i, on: :create }
+  validates :year, format: { with: /\A\d{4}\z/i, on: :create }
+
+  validates :plate, format: { with: /\A[A-Z]{3}\d{4}\z/i, on: :update }
+  validates :year, format: { with: /\A\d{4}\z/i, on: :update }
 end

@@ -10,10 +10,15 @@
 // Read Sprockets README (https://github.com/rails/sprockets#sprockets-directives) for details
 // about supported directives.
 //
-//= require jquery
 //= require jquery_ujs
-//= require twitter/bootstrap
+//= require jquery
+//= require bootstrap-datepicker.js
+//= require bootstrap-datepicker.min.js
+//= require bootstrap-datepicker.pt-BR.min.js
 //= require turbolinks
-//= require jquery.maskMoney.min 
-//= require jquery-ui
-//= require_tree .
+//= require numeral.min
+//= require bootstrap.min.js 
+//= require jquery.maskMoney.min
+
+
+

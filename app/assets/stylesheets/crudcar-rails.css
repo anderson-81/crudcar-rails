@@ -1,0 +1,52 @@
+.imgCustomer{
+width:150px;
+height:150px;
+}
+.modelTitle{
+font-weight: bold;
+font-size:30px;
+}
+.img-catalog{
+width:250px;
+height:250px;
+}
+.font-text{
+font-size: 12px;
+}
+.div-col{
+border:5px solid black;
+background-color: black;
+}
+.imgAction{
+width:25px !important;
+}
+body { background:  #89bbce  !important; }
+.center-block {float: none !important;}
+.alert-info {
+color: white !important;
+background-color: #1A5E7F !important;
+border-color: white !important;
+}
+.alert-success, .alert-notice {
+color: white !important;
+background-color: green !important;
+border-color: white !important;
+}
+.alert-danger {
+color: white !important;
+background-color: red !important;
+border-color: white !important;
+}
+.alert-warning {
+color: white !important;
+background-color: orange !important;
+border-color: white !important;
+}
+.imglogo{
+width:180px !important;
+height:180px !important;
+}
+.jumbotron{
+background-image: url('/img/back.png') !important;
+color: #AAB7B8  !important;
+}

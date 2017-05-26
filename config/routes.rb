@@ -1,5 +1,7 @@
 Rails.application.routes.draw do
   
+  get 'catalog/index'
+
   devise_for :users
   get 'home/index'
 
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   get 'customers/:custID/cars/:carID' => 'cars#edit'
 
   get 'customers/:custID/cars/:carID/show' => 'cars#show'
+
+  get '/users/sign_out' => 'home#index'
 
   #post 'customers/:custID/cars' => 'cars#create'
 
@@ -73,4 +77,11 @@ Rails.application.routes.draw do
   #     # (app/controllers/admin/products_controller.rb)
   #     resources :products
   #   end
+
+  devise_scope :user do
+    get '/logout',  :to => 'sessions#destroy'
+  end
+
+
+
 end

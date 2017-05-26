@@ -24,8 +24,6 @@ class Customer < ActiveRecord::Base
 
   validates :email, uniqueness: true
 
-  validates :salary, inclusion: {in: 0..9999999}
-
   #ValidatesTimeliness
   validates_date :birthday, :before => lambda { 18.years.ago }, :before_message => "Must be at least 18 years old."
 

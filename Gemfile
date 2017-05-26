@@ -1,5 +1,8 @@
 source 'https://rubygems.org'
 
+# Use sqlite3 as the database for Active Record
+gem 'sqlite3'
+
 gem 'will_paginate', '~> 3.1.0'
 
 #jquery.maskMoney for rails.
@@ -12,9 +15,6 @@ gem 'bcrypt-ruby', '3.0.0', :require => 'bcrypt'
 
 gem 'devise', '~> 3.4', '>= 3.4.1'
 
-#MySQL
-gem 'mysql2'
-
 #Easy file attachment management for ActiveRecord 
 gem 'paperclip', '~> 4.2'
 
@@ -23,9 +23,6 @@ gem 'validates_timeliness', '~> 4.0'
 
 #A library for generating fake data such as names, addresses, and phone numbers.
 gem 'faker'
-
-#Twitter Bootstrap for Rails 5 - 4.x Asset Pipeline: 
-gem "twitter-bootstrap-rails"
 
 gem 'coffee-script-source', '1.8.0'
 
@@ -39,7 +36,8 @@ gem 'uglifier', '>= 1.3.0'
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.1.0'
 # See https://github.com/rails/execjs#readme for more supported runtimes
-# gem 'therubyracer', platforms: :ruby
+
+#gem 'therubyracer', platforms: :ruby
 
 # Use jquery as the JavaScript library
 gem 'jquery-rails'

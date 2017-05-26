@@ -24,13 +24,12 @@ class CustomersController < ApplicationController
 
   def create
     @customer = Customer.new(customer_params)
+    print @customer
     respond_to do |format|
       if @customer.save
         format.html { redirect_to @customer, notice: 'Customer was successfully created.' }
-        format.json { render :show, status: :created, location: @customer }
       else
         format.html { render :new }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -39,19 +38,24 @@ class CustomersController < ApplicationController
     respond_to do |format|
       if @customer.update(customer_params)
         format.html { redirect_to @customer, notice: 'Customer was successfully updated.' }
-        format.json { render :show, status: :ok, location: @customer }
       else
         format.html { render :edit }
-        format.json { render json: @customer.errors, status: :unprocessable_entity }
       end
     end
   end
 
   def destroy
-    @customer.destroy
-    respond_to do |format|
-      format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
-      format.json { head :no_content }
+    @qtd = Customer.joins("INNER JOIN cars ON cars.Customer_id = customers.id").where('customers.id' => params[:id]).count
+    if @qtd == 0  
+      @customer.destroy
+      respond_to do |format|
+        format.html { redirect_to customers_url, notice: 'Customer was successfully destroyed.' }
+      end
+    else
+      @customer = Customer.find(params[:id])
+      @cars = Car.where("Customer_id = ?", params[:id]).paginate(:page => params[:page], :per_page => 1)
+      flash[:notice] = 'Costumer has car related and can not be excluded.'
+      redirect_to(@customer)
     end
   end
 
