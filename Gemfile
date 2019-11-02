@@ -13,7 +13,7 @@ gem 'maskmoney-rails', '~> 2.0', '>= 2.0.0.1'
 
 gem 'bcrypt-ruby', '3.0.0', :require => 'bcrypt'
 
-gem 'devise', '~> 3.4', '>= 3.4.1'
+gem 'devise', '~> 4.7'
 
 #Easy file attachment management for ActiveRecord 
 gem 'paperclip', '~> 4.2'
