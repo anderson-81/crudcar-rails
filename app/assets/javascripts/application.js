@@ -17,8 +17,5 @@
 //= require bootstrap-datepicker.pt-BR.min.js
 //= require turbolinks
 //= require numeral.min
-//= require bootstrap.min.js 
+//= require bootstrap.min.js
 //= require jquery.maskMoney.min
-
-
-

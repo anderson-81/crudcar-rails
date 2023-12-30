@@ -1,87 +1,28 @@
 Rails.application.routes.draw do
-  
-  get 'catalog/index'
-
+  #Devise
   devise_for :users
-  get 'home/index'
-
-  resources :cars
-  resources :customers
-  resources :reports
-  
-  # The priority is based upon order of creation: first created -> highest priority.
-  # See how all your routes lay out with "rake routes".
-
-  # You can have the root of your site routed with "root"
-  root 'home#index'
-
-  get 'customers/:custID/cars/new' => 'cars#new'
-  
-  get 'customers/:custID/cars/:carID' => 'cars#edit'
-
-  delete 'customers/:custID/cars/:carID' => 'cars#destroy'
-
-  get 'customers/:custID/cars/:carID' => 'cars#edit'
-
-  get 'customers/:custID/cars/:carID/show' => 'cars#show'
-
-  get '/users/sign_out' => 'home#index'
-
-  #post 'customers/:custID/cars' => 'cars#create'
-
-  # Example of regular route:
-  #   get 'products/:id' => 'catalog#view'
-
-  # Example of named route that can be invoked with purchase_url(id: product.id)
-  #   get 'products/:id/purchase' => 'catalog#purchase', as: :purchase
-
-  # Example resource route (maps HTTP verbs to controller actions automatically):
-  #   resources :products
-
-  # Example resource route with options:
-  #   resources :products do
-  #     member do
-  #       get 'short'
-  #       post 'toggle'
-  #     end
-  #
-  #     collection do
-  #       get 'sold'
-  #     end
-  #   end
-
-  # Example resource route with sub-resources:
-  #   resources :products do
-  #     resources :comments, :sales
-  #     resource :seller
-  #   end
-
-  # Example resource route with more complex sub-resources:
-  #   resources :products do
-  #     resources :comments
-  #     resources :sales do
-  #       get 'recent', on: :collection
-  #     end
-  #   end
-
-  # Example resource route with concerns:
-  #   concern :toggleable do
-  #     post 'toggle'
-  #   end
-  #   resources :posts, concerns: :toggleable
-  #   resources :photos, concerns: :toggleable
-
-  # Example resource route within a namespace:
-  #   namespace :admin do
-  #     # Directs /admin/products/* to Admin::ProductsController
-  #     # (app/controllers/admin/products_controller.rb)
-  #     resources :products
-  #   end
 
   devise_scope :user do
     get '/logout',  :to => 'sessions#destroy'
   end
 
+  # Root
+  root 'home#index'
 
+  # Customers
+  get '/customers', to: 'customers#index', as: 'customers'
+  get '/customers/new', to: 'customers#new', as: 'customer_new'
+  post '/customers/new', to: 'customers#create', as: 'customer_create'
+  get '/customers/:customer_id', to: 'customers#show', as: 'customer_show'
+  get '/customers/:customer_id/edit', to: 'customers#edit', as: 'customer_edit'
+  patch '/customers/:customer_id/update', to: 'customers#update', as: 'customer_update'
+  delete '/customers/:customer_id/destroy', to: 'customers#destroy', as: 'customer_destroy'
 
+  # Cars
+  get '/customers/:customer_id/cars', to: 'cars#index', as: 'customer_cars'
+  get '/customers/:customer_id/cars/new', to: 'cars#new', as: 'customer_car_new'
+  post '/customers/:customer_id/cars/new', to: 'cars#create', as: 'customer_car_create'
+  get '/customers/:customer_id/cars/:car_id/edit', to: 'cars#edit', as: 'customers_car_edit'
+  patch '/customers/:customer_id/cars/:car_id/edit', to: 'cars#update', as: 'customers_car_update'
+  delete '/customers/:customer_id/cars/:car_id/edit', to: 'cars#destroy', as: 'customers_car_destroy'
 end

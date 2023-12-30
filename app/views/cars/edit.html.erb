@@ -1,107 +1,112 @@
 <div class="container">
    <div class="row">
-      <div class="col-md-8 center-block">
-         <h1>Edit</h1>
-      </div>
-   </div>
-   <div class="row">
-      <div class="col-md-8 center-block">
-         <%= form_for @car, :class => "form-horizontal car", :html => { multipart: true } do |f| %>
-         <% if @car.errors.any? %>
-         <div id="error_expl" class="panel panel-danger">
-            <div class="panel-heading">
-               <h3 class="panel-title"><%= pluralize(@car.errors.count, "error") %> prohibited this car from being edit:</h3>
-            </div>
-            <div class="panel-body">
-               <ul>
-                  <% @car.errors.full_messages.each do |msg| %>
-                  <li><%= msg %></li>
-                  <% end %>
-               </ul>
-            </div>
-         </div>
-         <% end %>
-         <h4>Customer's Data:</h4>
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
          <div class="form-group">
-            <%= f.label "Id" %>
-            <%= f.text_field :Customer_id, :class => 'form-control customer_data', :value => @customer.id, :readonly => true %>
+            <h1>Edition</h1>
          </div>
-         <div class="form-group">
-            <%= f.label "Name" %>
-            <%= f.text_field :name, :class => 'form-control customer_data', :value => @customer.name, :readonly => true %>
-         </div>
-         <div class="form-group">
-            <hr>
-         </div>
-         <h4>Car's Data:</h4>
-         <div class="form-group">
-            <%= f.label :model %>
-            <%= f.text_field :model,  :maxlength => 100,  :class => 'form-control' %>
-         </div>
-         <div class="form-group">
-            <%= f.label :plate %>
-            <%= f.text_field :plate, :maxlength => 7, :class => 'form-control' %>
-         </div>
-         <div class="form-group">
-            <%= f.label :year %>
-            <%= f.number_field :year, :maxlength => 4, :class => 'form-control' %>
-         </div>
-         <div class="form-group">
-            <%= f.label :marketval %>
-            <%= f.text_field :marketval,  :maxlength => 15, :class => 'form-control' %>
-         </div>
-         <div class="form-group">
-            <label>Current image:</label>
-            <b><%= link_to ' image', @car.avatar.url %></b>
-         </div>
-         <div class="form-group">
-            <label>Photo</label>
-            <%= f.file_field :avatar, :class => 'form-control' %>
-         </div>
-         <div class="form-group">
-            <button type="button" class="btn btn-warning col-md-2 pull-right" data-toggle="modal" data-target="#modalEdit">Edit</button>
-            <%= link_to "Cancel", :back, :class => 'btn btn-default col-md-2 pull-right' %>
-            <button type="button" class="btn btn-danger col-md-2 pull-right" data-toggle="modal" data-target="#modalDelete">Delete</button>
-         </div>
-          <div id="modalEdit" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Question</h4>
+         <%= form_for @car, :url => customers_car_update_path, :class => "form-horizontal car", :html => { multipart: true } do |f| %>
+            <div class="form-group">
+               <% if @car.errors.any? %>
+                  <div id="error_expl" class="panel panel-danger">
+                     <div class="panel-heading">
+                        <h3 class="panel-title"><%= pluralize(@car.errors.count, "error") %> prohibited this car from being saved:</h3>
+                     </div>
+                     <div class="panel-body">
+                        <ul>
+                           <% @car.errors.full_messages.each do |msg| %>
+                           <li><%= msg %></li>
+                           <% end %>
+                        </ul>
+                     </div>
                   </div>
-                  <div class="modal-body">
-                     <p>Do you want edit this car?</p>
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                     <%= button_to "Yes",  car_path(:custID => @customer.id, :carID => @car.id, :id => @customer.id),  :method => :edit, :class => 'btn btn-warning' %>
+               <% end %>
+            </div>
+            <div class="form-group">
+               <h3 style="font-weight:bold;">Customer:</h3>
+            </div>
+            <div class="form-group">   
+               <%= f.label "Id" %>
+               <%= f.text_field :id, :class => 'form-control customer_data readonly-field', :value => @customer.id, :readonly => true  %>
+            </div>
+            <div class="form-group">
+               <%= f.label "Name" %>
+               <%= f.text_field :name, :class => 'form-control customer_data readonly-field', :value => @customer.name, :readonly => true %>
+            </div>
+            <div class="form-group">
+               <hr>
+            </div>
+            <h3 style="font-weight:bold;">Car:</h3>
+            <div class="form-group">
+               <%= f.hidden_field :id %>
+            </div>
+            <div class="form-group">
+               <%= f.label :model %>
+               <%= f.text_field :model,  :maxlength => 100,  :class => 'form-control' %>
+            </div>
+            <div class="form-group">
+               <%= f.label :plate %>
+               <%= f.text_field :plate, :maxlength => 7, :class => 'form-control readonly-field', :readonly => true %>
+            </div>
+            <div class="form-group">
+               <%= f.label :year %>
+               <%= f.number_field :year, :size => 4, :class => 'form-control' %>
+            </div>
+            <div class="form-group">
+               <%= f.label :marketval %>
+               <%= f.text_field :marketval,  :maxlength => 15, :class => 'form-control' %>
+            </div>
+            <div class="form-group">
+               <a href="<%= @car.avatar.url %>" target="_self"><img src="<%=@car.avatar.url %>" class="pull-right image-edition"></a>
+               <label class="pull-right padding-right-10">Current Photo:</label>
+            </div>
+            <div class="form-group">
+               <label>Photo</label>
+               <%= f.file_field :avatar, :class => 'form-control' %>
+            </div>
+            <div class="form-group">
+               <button type="button" class="btn btn-warning col-md-2 pull-right" data-toggle="modal" data-target="#modalEdit">Edit</button>
+               <%= link_to "Cancel", customer_show_path(@customer.id), :class => 'btn btn-default col-md-2 pull-right' %>
+               <button type="button" class="btn btn-danger col-md-2 pull-right" data-toggle="modal" data-target="#modalDelete">Delete</button>
+            </div>
+            <div id="modalEdit" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Question</h4>
+                     </div>
+                     <div class="modal-body">
+                        <p>Do you want edit this car?</p>
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <%= button_to "Yes", customers_car_update_path(@customer, @car), :method => :update, :class => 'btn btn-warning' %>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
-         <div id="modalDelete" class="modal fade" role="dialog">
-            <div class="modal-dialog">
-               <div class="modal-content">
-                  <div class="modal-header">
-                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                     <h4 class="modal-title">Question</h4>
-                  </div>
-                  <div class="modal-body">
-                     <p>Do you want delete this car?</p>
-                  </div>
-                  <div class="modal-footer">
-                     <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
-                     <%= button_to "Yes",  car_path(:id => @car.id),  :method => :delete, :class => 'btn btn-danger' %>
+            <div id="modalDelete" class="modal fade" role="dialog">
+               <div class="modal-dialog">
+                  <div class="modal-content">
+                     <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                        <h4 class="modal-title">Question</h4>
+                     </div>
+                     <div class="modal-body">
+                        <p>Do you want delete this car?</p>
+                     </div>
+                     <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">No</button>
+                        <%= button_to "Yes",  customers_car_destroy_path(@customer, @car),  :method => :delete, :class => 'btn btn-danger' %>
+                     </div>
                   </div>
                </div>
             </div>
-         </div>
          <% end %>
       </div>
    </div>
 </div>
 <script>
    var j = $.noConflict();
-   j("#car_marketval").maskMoney({thousands:'', decimal:'.'});
+   j("#car_marketval").maskMoney({ thousands: "", decimal: "." });
 </script>

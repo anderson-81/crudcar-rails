@@ -1,21 +1,21 @@
 source 'https://rubygems.org'
 
 # Use sqlite3 as the database for Active Record
-gem 'sqlite3'
+gem 'sqlite3', git: "https://github.com/larskanis/sqlite3-ruby", branch: "add-gemspec"
 
 gem 'will_paginate', '~> 3.1.0'
 
 #jquery.maskMoney for rails.
 gem 'maskmoney-rails', '~> 2.0', '>= 2.0.0.1'
 
-#Object-based searching. 
+#Object-based searching.
 #gem 'ransack'
 
 gem 'bcrypt-ruby', '3.0.0', :require => 'bcrypt'
 
 gem 'devise', '~> 3.4', '>= 3.4.1'
 
-#Easy file attachment management for ActiveRecord 
+#Easy file attachment management for ActiveRecord
 gem 'paperclip', '~> 4.2'
 
 #Date and time validation plugin for ActiveModel and Rails. Supports multiple ORMs and allows custom date/time formats.
@@ -69,3 +69,5 @@ end
 
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
+
+gem 'bigdecimal', '1.3.5'

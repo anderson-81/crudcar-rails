@@ -1,11 +1,11 @@
 <div class="container">
    <div class="row">
-      <div class="col-md-8 center-block">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
          <div class="form-group">
             <h1>Create Customer</h1>
             <hr>
          </div>
-         <%= form_for @customer, :class => "form-horizontal customer", :html => { multipart: true } do |f| %>
+         <%= form_for @customer, :url => customer_create_path(@customer), :class => "form-horizontal customer", :html => { multipart: true } do |f| %>
          <% if @customer.errors.any? %>
          <div id="error_expl" class="panel panel-danger">
             <div class="panel-heading">
@@ -35,7 +35,7 @@
          <div class="form-group">
             <%= f.label :birthday %>
             <div class="input-group date" data-provide="datepicker">
-               <%= f.text_field :birthday, :class => 'form-control', :readonly => true, :value => '01/01/1999' %>
+               <%= f.text_field :birthday, :class => 'form-control' %>
                <div class="input-group-addon">
                     <span class="glyphicon glyphicon-th"></span>
                </div>
@@ -43,25 +43,22 @@
          </div>
          <div class="form-group">
             <%= f.label :gender %>
-            <%= f.select :gender, options_for_select([[t('Male'), 'M'],[t('Female'), 'F']]), {}, {:class => 'form-control'} %>
+            <%= f.select :gender, options_for_select([[t('Male'), 'M'],[t('Female'), 'F']]), {}, {:class => 'form-control'}  %>
          </div>
          <div class="form-group">
             <%= f.label :avatar %>
-            <%= f.file_field :avatar, :class => 'form-control' %>
+            <%= f.file_field :avatar, :class => 'form-control'  %>
          </div>
          <div class="form-group">
             <%= f.submit nil, :class => 'btn btn-success col-md-2 pull-right', :value => 'Create'%>
-            <%= link_to "Cancel", :back, :class => 'btn btn-default col-md-2 pull-right' %>
+            <%= link_to "Cancel", customers_path, :class => 'btn btn-default col-md-2 pull-right' %>
          </div>
          <% end %>
       </div>
    </div>
 </div>
+<script src="/assets/components/datetimepicker.js"></script>
 <script>
    var j = $.noConflict();
-   j("#customer_salary").maskMoney({thousands:'', decimal:'.'});
-
-   $(function () {
-      $('#customer_birthday').datetimepicker();
-   });
+   j("#customer_salary").maskMoney({ thousands: "", decimal: "." });
 </script>

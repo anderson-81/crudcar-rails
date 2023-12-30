@@ -1,6 +1,6 @@
 <div class="container">
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
          <%- model_class = Customer -%>
          <div class="page-header">
             <h1><%=t '.title', :default => model_class.model_name.human.titleize %></h1>
@@ -8,11 +8,12 @@
       </div>
    </div>
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
          <div class="col-md-2">
-            <div class="row"><%= image_tag @customer.avatar.url, :class => 'imgCustomer' %></div>
+            <div class="row"><%= image_tag @customer.avatar.url, :class => 'image-customer' %></div>
          </div>
-         <div class="col-md-8">
+
+         <div class="col-md-offset-3 col-md-7">
             <div class="row">
                <strong><%= model_class.human_attribute_name(:name) %>:</strong> <%= @customer.name %>
             </div>
@@ -32,43 +33,48 @@
       </div>
    </div>
    <div class="row">
-      <div class="col-md-12">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
          <%= link_to t('.edit', :default => t("helpers.links.edit")),
-            edit_customer_path(@customer), :class => 'btn btn-warning pull-right col-md-2' %>
+            customer_edit_path(@customer), :class => 'btn btn-warning pull-right col-md-2' %>
       </div>
-   </div>
-   <hr>
-   <h4>Customer's Cars</h4>
-   <div class="responsive">
-      <table class="table">
-         <thead>
-            <tr>
-               <th><%= t(model_class.human_attribute_name(:model)) %></th>
-               <th class="text-center"><%= t(model_class.human_attribute_name(:year)) %></th>
-               <th class="text-center"><%= t(model_class.human_attribute_name(:marketval)) %></th>
-               <th class="text-center"><%=t '.actions', :default => t("helpers.actions") %></th>
-            </tr>
-         </thead>
-         <tbody>
-            <% @cars.each do |car| %>
-            <tr>
-               <td><%= car.model %></td>
-               <td class="text-center"><%= car.year %></td>
-               <td class="text-center"><%= number_to_currency(car.marketval, unit: "R$", separator: ",", delimiter: "") %></td>
-               <td class="text-center">
-                  <%= link_to image_tag("/img/select.png", :class => 'imgAction'), "/customers/#{car.Customer_id}/cars/#{car.id}" %>
-               </td>
-            </tr>
-            <% end %>
-         </tbody>
-      </table>
    </div>
    <div class="row">
-      <div class="col-md-4">
-         <%= will_paginate @cars %>
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+         <hr>
       </div>
-      <div class="col-md-8">
-         <%= link_to t('.new', :default => t("helpers.links.new")), "/customers/#{@customer.id}/cars/new", :class => 'btn btn-success pull-right', :value => 'Create' %>
+   </div>
+   <div class="row">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+         <h4>Customer's Cars</h4>
+         <div class="responsive">
+            <table class="table">
+               <thead>
+                  <tr>
+                     <th><%= t(model_class.human_attribute_name(:model)) %></th>
+                     <th class="text-center"><%= t(model_class.human_attribute_name(:year)) %></th>
+                     <th class="text-center"><%= t(model_class.human_attribute_name(:marketval)) %></th>
+                     <th class="text-center"><%=t '.actions', :default => t("helpers.actions") %></th>
+                  </tr>
+               </thead>
+               <tbody>
+                  <% @cars.each do |car| %>
+                     <tr>
+                        <td><%= car.model %></td>
+                        <td class="text-center"><%= car.year %></td>
+                        <td class="text-center"><%= number_to_currency(car.marketval, unit: "R$", separator: ",", delimiter: "") %></td>
+                        <td class="text-center">
+                           <%= link_to image_tag("/img/select.png", :class => 'imgAction'), customers_car_edit_path(car.Customer_id, car.id) %>
+                        </td>
+                     </tr>
+                  <% end %>
+               </tbody>
+            </table>
+         </div>
+      </div>
+   </div>
+   <div class="row">
+      <div class="col-md-offset-1 col-md-10 col-md-offset-1">
+         <%= will_paginate @cars %><%= link_to t('.new', :default => t("helpers.links.new")), customer_car_new_path(@customer.id), :class => 'btn btn-success pull-right col-md-2', :value => 'Create' %>
       </div>
    </div>
 </div>
